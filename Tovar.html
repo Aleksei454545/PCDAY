@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCDAY.UA</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+</head>
+<body>
+  <!-- Шапка -->
+  <header>
+    <div class="logo">
+      <a href="index.html"><img src="images/logo.png" alt="PCDAY.UA"></a>
+      <a href="index.html"><span>PCDAY.UA</span></a>
+    </div>
+    <div class="tagline">
+      <img src="images/dev.png" alt="Developer">
+      <h1>Вибір для будь-якої потреби!</h1>
+      <img src="images/gamer.png" alt="Gamer">
+    </div>
+    <div class="user-actions">
+      <a href="#">🔒 Увійти</a>
+      <a href="#">👤 Зареєструватися</a>
+    </div>
+  </header>
+  <hr>
+ 
+  <style>
+   
+    .product-container { display: flex; gap: 30px; align-items: start; }
+    .product-image img { max-width: 300px; }
+    .product-info h1 { font-size: 24px; }
+    .price { font-size: 28px; color: limegreen; margin: 10px 0; }
+    .badge { background: orange; padding: 2px 8px; border-radius: 4px; font-size: 14px; margin-left: 10px; }
+  </style>
+
+
+  <div id="app">
+    <div v-if="product" class="product-container">
+      <div class="product-image">
+        <img :src="product.image" :alt="product.name">
+      </div>
+      <div class="product-info">
+        <h1>{{ product.name }} <span class="badge">{{ product.status }}</span></h1>
+        <p class="price">{{ product.price }} ₴</p>
+        <h3>Опис товару</h3>
+        <p>{{ product.description }}</p>
+
+        <h3>Характеристики</h3>
+        <ul>
+          <li v-if="product.brand"><strong>Бренд:</strong> {{ product.brand }}</li>
+          <li v-if="product.status"><strong>Статус:</strong> {{ product.status }}</li>
+          <li v-if="product.cores"><strong>Кількість ядер:</strong> {{ product.cores }}</li>
+          <li v-if="product.socket"><strong>Сокет:</strong> {{ product.socket }}</li>
+          <li v-if="product.igpu"><strong>Інтегрована графіка:</strong> {{ product.igpu }}</li>
+          <li v-if="product.performance"><strong>Продуктивність:</strong> {{ product.performance }}</li>
+          <li v-if="product.vram"><strong>Обсяг пам'яті:</strong> {{ product.vram }}</li>
+          <li v-if="product.vramType"><strong>Тип пам'яті:</strong> {{ product.vramType }}</li>
+          <li v-if="product.bus"><strong>Шина пам'яті:</strong> {{ product.bus }}</li>
+          <li v-if="product.vramClock"><strong>Частота:</strong> {{ product.vramClock }}</li>
+          <li v-if="product.ports"><strong>Роз'єми для монітора:</strong> {{ product.ports }}</li>
+          <li v-if="product.Company"><strong>Виробник:</strong> {{ product.Company }}</li>
+          <li v-if="product.FromFaktor"><strong>Фром-фактор:</strong> {{ product.FromFaktor }}</li>
+          <li v-if="product.Socket"><strong>Сокет:</strong> {{ product.Socket }}</li>
+          <li v-if="product.OZP"><strong>ОЗП:</strong> {{ product.OZP }}</li>
+          <li v-if="product.Potuzhnist"><strong>Потужність:</strong> {{ product.Potuzhnist }}</li>
+          <li v-if="product.Sertyfikat"><strong>Сертифікат:</strong> {{ product.Sertyfikat }}</li>
+          <li v-if="product.GPUConnect"><strong>Підключення до відеокарт:</strong> {{ product.GPUConnect }}</li>
+          <li v-if="product.vid"><strong>Вид охолодження:</strong> {{ product.vid }}</li>
+          <li v-if="product.vidd"><strong>Вид інтерфейсу:</strong> {{ product.vidd }}</li>
+          <li v-if="product.ReadSpeed"><strong>Швидкість читання:</strong> {{ product.ReadSpeed }}</li>
+          <li v-if="product.WriteSpeed"><strong>Швидкість запису:</strong> {{ product.WriteSpeed }}</li>
+          <li v-if="product.Type"><strong>Тип:</strong> {{ product.Type }}</li>
+          <li v-if="product.Slots"><strong>Слотів розширення:</strong> {{ product.Slots }}</li>
+          <li v-if="product.CPU"><strong>Процесор:</strong> {{ product.CPU }}</li>
+          <li v-if="product.Motherboard"><strong>Материнська плата:</strong> {{ product.Motherboard }}</li>
+          <li v-if="product.GPU"><strong>Відеокарта:</strong> {{ product.GPU }}</li>
+          <li v-if="product.SSD"><strong>Внутрішній накопичувач:</strong> {{ product.SSD }}</li>
+          <li v-if="product.SSDType"><strong>Внутрішній накопичувач:</strong> {{ product.SSDType }}</li>
+          <li v-if="product.RAM"><strong>Оперативна пам'ять:</strong> {{ product.RAM }}</li>
+          <li v-if="product.PSU"><strong>Блок живлення:</strong> {{ product.PSU }}</li>
+          <li v-if="product.PSUSert"><strong>Сертифікат блока живлення:</strong> {{ product.PSUSert }}</li>
+          <li v-if="product.Display"><strong>Дисплей:</strong> {{ product.Display }}</li>
+          <li v-if="product.Storage"><strong>Обсяг памʼяті:</strong> {{ product.Storage }}</li>
+          <li v-if="product.OS"><strong>Операційна система:</strong> {{ product.OS }}</li>
+          <li v-if="product.Weight"><strong>Вага:</strong> {{ product.Weight }}</li>
+          <li v-if="product.Panel"><strong>Тип матриці:</strong> {{ product.Panel }}</li>
+          <li v-if="product.ResponseTime"><strong>Час відгуку:</strong> {{ product.ResponseTime }}</li>
+          <li v-if="product.Brightness"><strong>Яскравість:</strong> {{ product.Brightness }}</li>
+          <li v-if="product.AspectRatio"><strong>Співвідношення сторін:</strong> {{ product.AspectRatio }}</li>
+          <li v-if="product.pidkl"><strong>Підключення:</strong> {{ product.pidkl }}</li>
+          <li v-if="product.DPI"><strong>DPI:</strong> {{ product.DPI }}</li>
+          <li v-if="product.Candle"><strong>Свічки:</strong> {{ product.Candle }}</li>
+          <li v-if="product.speed"><strong>Cтор/хв:</strong> {{ product.speed }}</li>
+
+
+        </ul>
+      </div>
+    </div>
+    <div v-else>
+      <p>Завантаження товару...</p>
+    </div>
+  </div>
+
+  <script>
+    const { createApp, ref, onMounted } = Vue;
+
+    createApp({
+      setup() {
+        const product = ref(null);
+        const products = [
+          {
+            id: 40,
+            name: 'AMD Ryzen 5 3600',
+            brand: 'AMD',
+            status: 'Б/в',
+            image: 'images/Kompl/AMD Ryzen 5 3600.jpg',
+            price: 4799,
+            description: 'Популярний 6-ядерний процесор з архітектурою Zen 2, ідеальний для ігор і роботи.',
+            cores: 6,
+            socket: 'AM4',
+            igpu: 'Немає',
+            performance: '17000 points'
+            
+            
+          },
+          {
+            id: 8,
+            name: 'Ryzen 9 9950X3D',
+            brand: 'AMD',
+            status: 'Новий',
+            image: 'images/Kompl/9 9950x3d.webp',
+            price: 17999,
+            description: 'Флагманський 16-ядерний процесор з технологією 3D V-Cache.',
+            cores: 16,
+            socket: 'AM5',
+            igpu: 'Немає',
+            performance: '45000 points'
+            
+          },
+          {
+            id: 9,
+            name: 'Ryzen 9 9900X3D',
+            brand: 'AMD',
+            status: 'Новий',
+            image: 'images/Kompl/Ryzen 9 9900X3D.jpg',
+            price: 16999,
+            description: 'Потужний процесор з високою продуктивністю для професіоналів.',
+            cores: 16,
+            socket: 'AM5',
+            igpu: 'Немає',
+            performance: '31000 points'
+          },
+          {
+            id: 10,
+            name: 'Intel® CoreTM Ultra 200S',
+            brand: 'Intel',
+            status: 'Новий',
+            image: 'images/Kompl/Intel® CoreTM Ultra 200S.webp',
+            price: 15499,
+            description: 'Новітній процесор Intel для мобільних рішень.',
+            cores: 12,
+            socket: 'LGA1700',
+            igpu: 'Intel Xe',
+            performance: '33000 points'
+          },
+          {
+            id: 11,
+            name: 'Intel® CoreTM Ultra 200HX',
+            brand: 'Intel',
+            status: 'Новий',
+            image: 'images/Kompl/Intel® CoreTM Ultra 200HX.webp',
+            price: 15999,
+            description: 'Потужний процесор Intel з фокусом на енергоефективність.',
+            cores: 14,
+            socket: 'LGA1700',
+            igpu: 'Intel Xe',
+            performance: '29500 points'
+          },
+          {
+            id: 12,
+            name: 'Intel® CoreTM Ultra 200KF',
+            brand: 'Intel',
+            status: 'Новий',
+            image: 'images/Kompl/Intel® CoreTM Ultra 200KF.webp',
+            price: 14999,
+            description: 'Без вбудованої графіки, підходить для геймерів з дискретним GPU.',
+            cores: 12,
+            socket: 'LGA1700',
+            igpu: 'Немає',
+            performance: '18500 points'
+          },
+          {
+            id: 13,
+            name: 'Intel® CoreTM Ultra 200U',
+            brand: 'Intel',
+            status: 'Новий',
+            image: 'images/Kompl/Intel® CoreTM Ultra 200U.jpg',
+            price: 12499,
+            description: 'Енергоефективний мобільний процесор для ультрабуків.',
+            cores: 10,
+            socket: 'BGA',
+            igpu: 'Intel Xe',
+            performance: '19200 points'
+          },
+          {
+            id: 14,
+            name: 'Intel® CoreTM Ultra 200V',
+            brand: 'Intel',
+            status: 'Новий',
+            image: 'images/Kompl/Intel® CoreTM Ultra 200V.jpg',
+            price: 13499,
+            description: 'Процесор з високою автономністю та продуктивністю.',
+            cores: 10,
+            socket: 'BGA',
+            igpu: 'Intel Xe',
+            performance: '20100 points'
+          },
+          {
+            id: 38,
+            name: 'AMD Ryzen 5 5500',
+            brand: 'AMD',
+            status: 'Новий',
+            image: 'images/Kompl/AMD Ryzen 5 5500.jpg',
+            price: 3899,
+            description: 'Доступне 6-ядерне рішення для геймінгу.',
+            cores: 6,
+            socket: 'AM4',
+            igpu: 'Немає',
+            performance: '16200 points'
+          },
+          {
+            id: 39,
+            name: 'Intel Core i5-14400F',
+            brand: 'Intel',
+            status: 'Б/в',
+            image: 'images/Kompl/Intel Core i5-14400F.jpg',
+            price: 4599,
+            description: 'Популярний бюджетний процесор без вбудованої графіки.',
+            cores: 10,
+            socket: 'LGA1700',
+            igpu: 'Немає',
+            performance: '20400 points'
+          },
+          {
+            id: 41,
+            name: 'AMD Ryzen 5 8400F',
+            brand: 'AMD',
+            status: 'Новий',
+            image: 'images/Kompl/AMD Ryzen 5 8400F.webp',
+            price: 5699,
+            description: 'Сучасний 6-ядерний процесор для середнього класу ПК.',
+            cores: 6,
+            socket: 'AM5',
+            igpu: 'Немає',
+            performance: '20100 points'
+            
+          },
+          {
+          id: 1,
+          name: 'Radeon RX 9070',
+          brand: 'AMD',
+          status: 'Новий',
+          image: 'images/Kompl/Radeon RX 9070.jpg',
+          price: 32999,
+          description: 'Потужна ігрова відеокарта останнього покоління з 16 ГБ GDDR6 для вимогливих геймерів і професіоналів.',
+          vram: '16384 Мб',
+          vramType: 'GDDR6',
+          bus: '256 бит',
+          vramClock: '20000 МГц',
+          ports: '2 x HDMI 2.1b, 2 x DisplayPort 2.1a'
+        },
+        {
+          id: 2,
+          name: 'Radeon RX 9070 XT',
+          brand: 'AMD',
+          status: 'Новий',
+          image: 'images/Kompl/Radeon RX 9070 XT.jpg',
+          price: 36189,
+          description: 'Вдосконалена версія RX 9070 з покращеною продуктивністю, ідеальна для 4K-геймінгу та стрімінгу.',
+          vram: '16384 Мб',
+          vramType: 'GDDR6',
+          bus: '256 бит',
+          vramClock: '21000 МГц',
+          ports: '2 x HDMI 2.1b, 2 x DisplayPort 2.1a'
+        },
+        {
+          id: 3,
+          name: 'GeForce RTX 5060',
+          brand: 'NVIDIA',
+          status: 'Новий',
+          image: 'images/Kompl/GeForce RTX 5060.jpg',
+          price: 17999,
+          description: 'Ідеальний вибір для Full HD геймінгу з новітньою архітектурою Ada Lovelace та підтримкою DLSS 3.',
+          vram: '8192 Мб',
+          vramType: 'GDDR6',
+          bus: '128 бит',
+          vramClock: '18000 МГц',
+          ports: '1 x HDMI 2.1, 3 x DisplayPort 1.4a'
+        },
+        {
+          id: 4,
+          name: 'GeForce RTX 5060TI',
+          brand: 'NVIDIA',
+          status: 'Новий',
+          image: 'images/Kompl/GeForce RTX 5060TI.jpg',
+          price: 19999,
+          description: 'Покращена версія RTX 5060 з більшою кількістю CUDA-ядер для продуктивнішого ігрового досвіду.',
+          vram: '8192 Мб',
+          vramType: 'GDDR6X',
+          bus: '192 бит',
+          vramClock: '19000 МГц',
+          ports: '1 x HDMI 2.1, 3 x DisplayPort 1.4a'
+        },
+        {
+          id: 5,
+          name: 'GeForce RTX 5070',
+          brand: 'NVIDIA',
+          status: 'Новий',
+          image: 'images/Kompl/GeForce RTX 5070.jpg',
+          price: 29999,
+          description: 'Відеокарта середнього класу з підтримкою трасування променів та DLSS 3.5 для плавного ігрового процесу.',
+          vram: '12288 Мб',
+          vramType: 'GDDR6X',
+          bus: '192 бит',
+          vramClock: '21000 МГц',
+          ports: '1 x HDMI 2.1, 3 x DisplayPort 1.4a'
+        },
+        {
+          id: 6,
+          name: 'GeForce RTX 5080',
+          brand: 'NVIDIA',
+          status: 'Новий',
+          image: 'images/Kompl/GeForce RTX 5080.jpg',
+          price: 54109,
+          description: 'Високопродуктивна відеокарта для ентузіастів, що забезпечує відмінну продуктивність у 4K.',
+          vram: '16384 Мб',
+          vramType: 'GDDR6X',
+          bus: '256 бит',
+          vramClock: '23000 МГц',
+          ports: '1 x HDMI 2.1, 3 x DisplayPort 2.0'
+        },
+        {
+          id: 7,
+          name: 'GeForce RTX 5090',
+          brand: 'NVIDIA',
+          status: 'Новий',
+          image: 'images/Kompl/GeForce RTX 5090.jpg',
+          price: 135999,
+          description: 'Флагманська відеокарта NVIDIA для 8K-геймінгу, створена для максимального FPS і майбутнього ігрового досвіду.',
+          vram: '24576 Мб',
+          vramType: 'GDDR6X',
+          bus: '384 бит',
+          vramClock: '24000 МГц',
+          ports: '1 x HDMI 2.1, 3 x DisplayPort 2.1'
+        },
+        {
+          id: 42,
+          name: 'GeForce RTX 3060',
+          brand: 'NVIDIA',
+          status: 'Б/в',
+          image: 'images/Kompl/GeForce RTX 3060.jpg',
+          price: 11999,
+          description: 'Бюджетне рішення для геймінгу в 1080p з підтримкою RTX та DLSS.',
+          vram: '12288 Мб',
+          vramType: 'GDDR6',
+          bus: '192 бит',
+          vramClock: '15000 МГц',
+          ports: '1 x HDMI 2.1, 3 x DisplayPort 1.4a'
+        },
+        {
+          id: 43,
+          name: 'Radeon RX 6600 XT',
+          brand: 'AMD',
+          status: 'Б/в',
+          image: 'images/Kompl/Radeon RX 6600 XT.jpeg',
+          price: 11499,
+          description: 'Гарний варіант для Full HD геймінгу, збалансована потужність і енергоефективність.',
+          vram: '8192 Мб',
+          vramType: 'GDDR6',
+          bus: '128 бит',
+          vramClock: '16000 МГц',
+          ports: '1 x HDMI 2.1, 3 x DisplayPort 1.4'
+        },
+        {
+          id: 23,
+          name: 'Asus ROG STRIX B850-A GAMING WIFI',
+          brand: 'AMD',
+          status: 'Новий',
+          Company: 'Asus',
+          image: 'images/Kompl/Asus ROG STRIX B850-A GAMING WIFI.jpg',
+          price: 13999,
+          description: 'Ігрова материнська плата форм-фактору ATX на чіпсеті AMD B850 з підтримкою Wi-Fi 6E, PCIe 5.0 та підсвіткою Aura Sync.',
+          FromFaktor: 'ATX',
+          Socket: 'AM5',
+          OZP: 'DDR5'
+        },
+        {
+          id: 24,
+          name: 'Asus TUF GAMING B850-PLUS WIFI',
+          brand: 'AMD',
+          status: 'Новий',
+          Company: 'Asus',
+          image: 'images/Kompl/Asus TUF GAMING B850-PLUS WIFI.jpg',
+          price: 10189,
+          description: 'Надійна материнська плата TUF серії з підтримкою AM5 процесорів, PCIe 5.0 та розширеною системою охолодження.',
+          FromFaktor: 'ATX',
+          Socket: 'AM5',
+          OZP: 'DDR5'
+        },
+        {
+          id: 25,
+          name: 'Asus TUF GAMING B850M-PLUS WIFI',
+          brand: 'AMD',
+          status: 'Новий',
+          Company: 'Asus',
+          image: 'images/Kompl/Asus TUF GAMING B850M-PLUS WIFI.jpg',
+          price: 8999,
+          description: 'Компактна microATX плата з чіпсетом B850, підтримкою Wi-Fi та сучасних технологій живлення.',
+          FromFaktor: 'microATX',
+          Socket: 'AM5',
+          OZP: 'DDR5'
+        },
+        {
+          id: 26,
+          name: 'Gigabyte B850 AORUS ELITE WIFI7',
+          brand: 'AMD',
+          status: 'Новий',
+          Company: 'Gigabyte',
+          image: 'images/Kompl/Gigabyte B850 AORUS ELITE WIFI7.jpg',
+          price: 6500,
+          description: 'Потужна ігрова плата з Wi-Fi 7, PCIe 5.0, підтримкою DDR5 та міцною елементною базою.',
+          FromFaktor: 'ATX',
+          Socket: 'AM5',
+          OZP: 'DDR5'
+        },
+        {
+          id: 27,
+          name: 'ASRock B850 Pro RS WiFi',
+          brand: 'AMD',
+          status: 'Новий',
+          Company: 'ASRock',
+          image: 'images/Kompl/ASRock B850 Pro RS WiFi.jpg',
+          price: 4999,
+          description: 'Функціональна плата для AM5 з Wi-Fi, підтримкою PCIe 5.0 та DDR5 оперативної пам’яті.',
+          FromFaktor: 'ATX',
+          Socket: 'AM5',
+          OZP: 'DDR5'
+        },
+        {
+          id: 28,
+          name: 'MSI MPG X870E EDGE TI WIFI',
+          brand: 'AMD',
+          status: 'Новий',
+          Company: 'MSI',
+          image: 'images/Kompl/MSI MPG X870E EDGE TI WIFI.jpg',
+          price: 3109,
+          description: 'Материнська плата преміум-класу з чіпсетом X870E, підтримкою найновіших технологій та чудовим дизайном.',
+          FromFaktor: 'ATX',
+          Socket: 'AM5',
+          OZP: 'DDR5'
+        },
+        {
+          id: 29,
+          name: 'Asus ROG STRIX B860-F GAMING WIFI',
+          brand: 'Intel',
+          status: 'Новий',
+          Company: 'Asus',
+          image: 'images/Kompl/Asus ROG STRIX B860-F GAMING WIFI.jpg',
+          price: 4599,
+          description: 'Ігрова материнська плата на базі Intel B860 з Wi-Fi, RGB-підсвіткою та підтримкою DDR5.',
+          FromFaktor: 'ATX',
+          Socket: 'LGA1700',
+          OZP: 'DDR5'
+        },
+        {
+          id: 30,
+          name: 'Gigabyte B850 GAMING WIFI6',
+          brand: 'AMD',
+          status: 'Новий',
+          Company: 'Gigabyte',
+          image: 'images/Kompl/Gigabyte B850 GAMING WIFI6.jpg',
+          price: 7999,
+          description: 'Материнська плата серії Gaming з Wi-Fi 6, підтримкою AM5 процесорів та DDR5.',
+          FromFaktor: 'ATX',
+          Socket: 'AM5',
+          OZP: 'DDR5'
+        },
+        {
+          id: 44,
+          name: 'Asus Prime B450M-A II',
+          brand: 'AMD',
+          status: 'Б/в',
+          Company: 'Asus',
+          image: 'images/Kompl/Asus Prime B450M-A II.jpg',
+          price: 3899,
+          description: 'Компактна microATX плата для процесорів AM4 з підтримкою DDR4 та базовими функціями.',
+          FromFaktor: 'microATX',
+          Socket: 'AM4',
+          OZP: 'DDR4'
+        },
+        {
+          id: 45,
+          name: 'Gigabyte B760M D3HP DDR4',
+          brand: 'Intel',
+          status: 'Б/в',
+          Company: 'Gigabyte',
+          image: 'images/Kompl/Gigabyte B760M D3HP DDR4.jpg',
+          price: 4499,
+          description: 'Надійна microATX плата з чіпсетом Intel B760 та підтримкою оперативної пам’яті DDR4.',
+          FromFaktor: 'microATX',
+          Socket: 'LGA1700',
+          OZP: 'DDR4'
+        },
+        {
+          id: 15,
+          name: 'Kingston FURY Beast Black',
+          brand: 'Kingston',
+          status: 'Новий',
+          image: "images/Kompl/Kingston FURY Beast Black.jpg",
+          price: 3299,
+          description: 'Оперативна памʼять з частотою 3200 МГц без підсвітки для ігрових та робочих ПК.',
+          Company: 'Kingston',
+          OZP: 'DDR4',
+          vram: '16 ГБ (2x8)',
+          vramClock: '3200 МГц',
+
+        },
+        {
+          id: 16,
+          name: 'ADATA XPG Lancer Blade',
+          brand: 'ADATA',
+          status: 'Новий',
+          image: "images/Kompl/ADATA XPG Lancer Blade.jpg",
+          price: 8399,
+          description: 'Низькопрофільна DDR5-памʼять із високою частотою та покращеною енергоефективністю.',
+          Company: 'ADATA',
+          OZP: 'DDR5',
+          vram: '32 ГБ (2x16)',
+          vramClock: '6000 МГц',
+
+        },
+        {
+          id: 17,
+          name: 'ADATA XPG SPECTRIX D35G',
+          brand: 'ADATA',
+          status: 'Новий',
+          image: "images/Kompl/ADATA XPG SPECTRIX D35G.jpg",
+          price: 9599,
+          description: 'Стильна оперативна памʼять з RGB-підсвіткою та підтримкою Intel XMP 3.0.',
+          Company: 'ADATA',
+          OZP: 'DDR4',
+          vram: '32 ГБ (2x16)',
+          vramClock: '3600 МГц',
+
+        },
+        {
+          id: 18,
+          name: 'ADATA XPG Lancer',
+          brand: 'ADATA',
+          status: 'Новий',
+          image: "images/Kompl/ADATA XPG Lancer.jpg",
+          price: 8399,
+          description: 'DDR5-памʼять нового покоління для геймерів з високою пропускною здатністю.',
+          Company: 'ADATA',
+          OZP: 'DDR5',
+          vram: '32 ГБ (2x16)',
+          vramClock: '6000 МГц',
+
+        },
+        {
+          id: 19,
+          name: 'Kingston Fury Beast Black RGB',
+          brand: 'Kingston',
+          status: 'Новий',
+          image: "images/Kompl/Kingston Fury Beast Black RGB.jpg",
+          price: 5999,
+          description: 'Оперативна памʼять з ефектною RGB-підсвіткою та частотою 3600 МГц.',
+          Company: 'Kingston',
+          OZP: 'DDR4',
+          vram: '16 ГБ (2x8)',
+          vramClock: '3600 МГц',
+
+        },
+        {
+          id: 20,
+          name: 'ADATA XPG Gammix D30',
+          brand: 'ADATA',
+          status: 'Б/в',
+          image: "images/Kompl/ADATA XPG Gammix D30.jpg",
+          price: 3799,
+          description: 'Бюджетна памʼять з алюмінієвим радіатором і підтримкою XMP 2.0.',
+          Company: 'ADATA',
+          OZP: 'DDR4',
+          vram: '16 ГБ (2x8)',
+          vramClock: '3200 МГц',
+
+        },
+        {
+          id: 21,
+          name: 'G. Skill Ripjaws S5',
+          brand: 'G.Skill',
+          status: 'Новий',
+          image: "images/Kompl/G. Skill Ripjaws S5.jpg",
+          price: 5699,
+          description: 'Сумісна з Intel DDR5 памʼять з низьким профілем і великою швидкістю.',
+          Company: 'G.Skill',
+          OZP: 'DDR5',
+          vram: '32 ГБ (2x16)',
+          vramClock: '6000 МГц',
+
+        },
+        {
+          id: 22,
+          name: 'G. Skill Aegis',
+          brand: 'G.Skill',
+          status: 'Б/в',
+          image: "images/Kompl/G. Skill Aegis.jpg",
+          price: 2499,
+          description: 'Базова DDR4 памʼять для щоденного використання.',
+          Company: 'G.Skill',
+          OZP: 'DDR4',
+          vram: '8 ГБ (1x8)',
+          vramClock: '2666 МГц',
+
+        },
+        {
+          id: 46,
+          name: 'G. Skill Trident Z RGB',
+          brand: 'G.Skill',
+          status: 'Новий',
+          image: "images/Kompl/G. Skill Trident Z RGB.jpg",
+          price: 4899,
+          description: 'Популярна памʼять з яскравою RGB-підсвіткою та високою продуктивністю.',
+          Company: 'G.Skill',
+          OZP: 'DDR4',
+          vram: '16 ГБ (2x8)',
+          vramClock: '3600 МГц',
+
+        },
+        {
+          id: 47,
+          name: 'Corsair Vengeance RGB Black',
+          brand: 'Corsair',
+          status: 'Новий',
+          image: "images/Kompl/Corsair Vengeance RGB Black.jpg",
+          price: 5499,
+          description: 'Високошвидкісна памʼять з RGB-підсвіткою, розроблена для геймерів і ентузіастів.',
+          Company: 'Corsair',
+          OZP: 'DDR4',
+          vram: '16 ГБ (2x8)',
+          vramClock: '3600 МГц',
+
+        },
+          {
+          id: 31,
+          name: 'Cougar GLE',
+          brand: 'Cougar',
+          status: 'Новий',
+          image: 'images/Kompl/Cougar GLE.jpg',
+          price: 2899,
+          description: 'Надійний блок живлення з сертифікацією 80 PLUS Bronze, підтримує сучасні конфігурації з оптимальним розподілом потужності.',
+          Potuzhnist: '650 Вт',
+          FromFaktor: 'ATX',
+          Sertyfikat: '80 PLUS Bronze',
+          GPUConnect: '2x 6+2-pin'
+        },
+        {
+          id: 32,
+          name: 'Cougar GLE 1000',
+          brand: 'Cougar',
+          status: 'Новий',
+          image: 'images/Kompl/Cougar GLE 1000.jpg',
+          price: 3999,
+          description: 'Потужний блок живлення для геймерських систем з сертифікатом 80 PLUS Gold та модульною системою кабелів.',
+          Potuzhnist: '1000 Вт',
+          FromFaktor: 'ATX',
+          Sertyfikat: '80 PLUS Gold',
+          GPUConnect: '3x 6+2-pin'
+        },
+        {
+          id: 33,
+          name: 'NZXT C1200W',
+          brand: 'NZXT',
+          status: 'Новий',
+          image: 'images/Kompl/NZXT C1200W.jpg',
+          price: 4599,
+          description: 'Модульний блок живлення преміум-класу з сертифікатом 80 PLUS Gold, призначений для ентузіастів і потужних відеокарт.',
+          Potuzhnist: '1200 Вт',
+          FromFaktor: 'ATX',
+          Sertyfikat: '80 PLUS Gold',
+          GPUConnect: '3x 6+2-pin, 1x 12VHPWR'
+        },
+        {
+          id: 34,
+          name: 'Vinga VPS Bronze B1',
+          brand: 'Vinga',
+          status: 'Новий',
+          image: 'images/Kompl/Vinga VPS Bronze B1.webp',
+          price: 6699,
+          description: 'Доступний блок живлення з базовою ефективністю та підтримкою більшості конфігурацій середнього класу.',
+          Potuzhnist: '600 Вт',
+          FromFaktor: 'ATX',
+          Sertyfikat: '80 PLUS Bronze',
+          GPUConnect: '1x 6+2-pin'
+        },
+        {
+          id: 35,
+          name: 'Corsair CV650',
+          brand: 'Corsair',
+          status: 'Новий',
+          image: 'images/Kompl/Corsair CV650.png',
+          price: 6199,
+          description: 'Надійний блок живлення з базовим сертифікатом ефективності та класичним дизайном від Corsair.',
+          Potuzhnist: '650 Вт',
+          FromFaktor: 'ATX',
+          Sertyfikat: '80 PLUS Bronze',
+          GPUConnect: '2x 6+2-pin'
+        },
+        {
+          id: 36,
+          name: 'Corsair SF1000',
+          brand: 'Corsair',
+          status: 'Новий',
+          image: 'images/Kompl/Corsair SF1000.jpg',
+          price: 12999,
+          description: 'Компактний SFX блок живлення з потужністю 1000 Вт, повністю модульний, ідеально підходить для mini-ITX систем.',
+          Potuzhnist: '1000 Вт',
+          FromFaktor: 'SFX',
+          Sertyfikat: '80 PLUS Platinum',
+          GPUConnect: '2x 6+2-pin, 1x 12VHPWR'
+        },
+        {
+          id: 37,
+          name: 'be quiet! Power Zone 2',
+          brand: 'be quiet!',
+          status: 'Новий',
+          image: 'images/Kompl/be quiet! Power Zone 2.jpg',
+          price: 5499,
+          description: 'Тихий та ефективний блок живлення з потужністю 850 Вт, оснащений покращеним охолодженням і кабель-менеджментом.',
+          Potuzhnist: '850 Вт',
+          FromFaktor: 'ATX',
+          Sertyfikat: '80 PLUS Gold',
+          GPUConnect: '2x 6+2-pin'
+        },
+        {
+          id: 48,
+          name: 'Be Quiet! System Power 10',
+          brand: 'be quiet!',
+          status: 'Б/в',
+          image: 'images/Kompl/Be Quiet! System Power 10.png',
+          price: 5499,
+          description: 'Енергоефективний блок живлення середнього класу з базовим набором функцій для збірок без високих навантажень.',
+          Potuzhnist: '750 Вт',
+          FromFaktor: 'ATX',
+          Sertyfikat: '80 PLUS Bronze',
+          GPUConnect: '2x 6+2-pin'
+        },
+        {
+          id: 49,
+          name: 'Deepcool AK620 ZERO DARK',
+          brand: 'Deepcool',
+          status: 'Новий',
+          image: 'images/Kompl/Deepcool AK620 ZERO DARK.jpg',
+          price: 3999,
+          vid: 'Повітряне охолодження',
+          socket: 'LGA1700 / LGA1200 / AM4 / AM5'
+        },
+        {
+          id: 50,
+          name: 'Deepcool GAMMAXX 300',
+          brand: 'Deepcool',
+          status: 'Новий',
+          image: 'images/Kompl/Deepcool GAMMAXX 300.png',
+          price: 749,
+          vid: 'Повітряне охолодження',
+          socket: 'LGA115x / AM3 / AM4'
+        },
+        {
+          id: 51,
+          name: 'Be Quiet! Pure Rock 3',
+          brand: 'Be Quiet!',
+          status: 'Новий',
+          image: 'images/Kompl/Be Quiet! Pure Rock 3.jpg',
+          price: 4499,
+          vid: 'Повітряне охолодження',
+          socket: 'LGA1700 / LGA1200 / AM4'
+        },
+        {
+          id: 52,
+          name: 'Be Quiet! Light Loop',
+          brand: 'Be Quiet!',
+          status: 'Новий',
+          image: 'images/Kompl/Be Quiet! Light Loop.jpg',
+          price: 5999,
+          vid: 'Водяне охолодження',
+          socket: 'LGA1700 / AM4 / AM5'
+        },
+        {
+          id: 53,
+          name: 'Be Quiet! Pure Loop 2',
+          brand: 'Be Quiet!',
+          status: 'Новий',
+          image: 'images/Kompl/Be Quiet! Pure Loop 2.png',
+          price: 4999,
+          vid: 'Водяне охолодження',
+          socket: 'LGA1700 / LGA1200 / AM4 / AM5'
+        },
+        {
+          id: 54,
+          name: 'Aerocool Cylon 4F ARGB',
+          brand: 'Aerocool',
+          status: 'Новий',
+          image: 'images/Kompl/Aerocool Cylon 4F ARGB.jpg',
+          price: 1499,
+          vid: 'Повітряне охолодження',
+          socket: 'LGA115x / AM4'
+        },
+        {
+          id: 55,
+          name: 'Aerocool Cylon 4 ARGB',
+          brand: 'Aerocool',
+          status: 'Новий',
+          image: 'images/Kompl/Aerocool Cylon 4 ARGB.jpg',
+          price: 1499,
+          vid: 'Повітряне охолодження',
+          socket: 'LGA115x / AM4'
+        },
+        {
+          id: 56,
+          name: 'AeroCool Oasis L360',
+          brand: 'Aerocool',
+          status: 'Новий',
+          image: 'images/Kompl/AeroCool Oasis L360.jpg',
+          price: 5899,
+          vid: 'Водяне охолодження',
+          socket: 'LGA1700 / AM4 / AM5'
+        },
+        {
+          id: 57,
+          name: 'Cooler Master MasterAir MA620P',
+          brand: 'Cooler Master',
+          status: 'Б/в',
+          image: 'images/Kompl/Cooler Master MasterAir MA620P.jpg',
+          price: 1599,
+          vid: 'Повітряне охолодження',
+          socket: 'LGA115x / AM4'
+        },
+        {
+          id: 58,
+          name: 'Cooler Master MasterAir MA624 Stealth',
+          brand: 'Cooler Master',
+          status: 'Б/в',
+          image: 'images/Kompl/Cooler Master MasterAir MA624 Stealth.png',
+          price: 1799,
+          vid: 'Повітряне охолодження',
+          socket: 'LGA1700 / LGA1200 / AM4 / AM5'
+        },
+        {
+          id: 59,
+          name: 'Cooler Master Hyper 212X Army',
+          brand: 'Cooler Master',
+          status: 'Новий',
+          image: 'images/Kompl/Cooler Master Hyper 212X Army.jpg',
+          price: 999,
+          vid: 'Повітряне охолодження',
+          socket: 'LGA115x / AM4'
+        },
+        {
+          id: 60,
+          name: 'Kingston SSDNow A400 TLC',
+          brand: 'Kingston',
+          vram: '500GB',
+          image: "images/Kompl/Kingston SSDNow A400 TLC.jpg",
+          price: 1799,
+          vidd: 'SATA',
+          FromFaktor: '2.5"',
+          ReadSpeed: '500 МБ/с',
+          WriteSpeed: '450 МБ/с',
+          description: 'Бюджетний SSD-диск з надійною памʼяттю типу TLC, підходить для щоденних задач.'
+        },
+        {
+          id: 61,
+          name: 'Kingston NV3 3D NAND 1TB M.2',
+          brand: 'Kingston',
+          vram: '1000GB',
+          image: "images/Kompl/Kingston NV3 3D NAND 1TB M.2.jpg",
+          price: 2749,
+          vidd: 'M2',
+          FromFaktor: 'M.2 2280',
+          ReadSpeed: '3500 МБ/с',
+          WriteSpeed: '2100 МБ/с',
+          description: 'SSD з інтерфейсом M.2 та памʼяттю 3D NAND — ідеальне рішення для швидкої роботи системи.'
+        },
+        {
+          id: 62,
+          name: 'Kingston KC3000 3D NAND TLC',
+          brand: 'Kingston',
+          vram: '1000GB',
+          image: "images/Kompl/Kingston KC3000 3D NAND TLC.jpg",
+          price: 4499,
+          vidd: 'M2',
+          FromFaktor: 'M.2 2280',
+          ReadSpeed: '7000 МБ/с',
+          WriteSpeed: '6000 МБ/с',
+          description: 'Потужний SSD з TLC-памʼяттю, призначений для професіоналів і геймерів.'
+        },
+        {
+          id: 63,
+          name: 'Samsung 990 PRO V-NAND',
+          brand: 'Samsung',
+          vram: '2000GB',
+          image: "images/Kompl/Samsung 990 PRO V-NAND.jpg",
+          price: 8999,
+          vidd: 'M2',
+          FromFaktor: 'M.2 2280',
+          ReadSpeed: '7450 МБ/с',
+          WriteSpeed: '6900 МБ/с',
+          description: 'Флагманський SSD з надзвичайною швидкістю на базі памʼяті V-NAND.'
+        },
+        {
+          id: 64,
+          name: 'Samsung 990 PRO V-NAND',
+          brand: 'Samsung',
+          vram: '1000GB',
+          image: "images/Kompl/Samsung 990 PRO V-NAND.jpg",
+          price: 4999,
+          vidd: 'M2',
+          FromFaktor: 'M.2 2280',
+          ReadSpeed: '7450 МБ/с',
+          WriteSpeed: '6900 МБ/с',
+          description: 'Той самий топовий Samsung 990 PRO, але з меншим обсягом за доступнішою ціною.'
+        },
+        {
+          id: 65,
+          name: 'Samsung Portable SSD T7 Shield',
+          brand: 'Samsung',
+          vram: '1000GB',
+          image: "images/Kompl/Samsung Portable SSD T7 Shield.jpg",
+          price: 4499,
+          vidd: 'SATA',
+          FromFaktor: 'Зовнішній',
+          ReadSpeed: '1050 МБ/с',
+          WriteSpeed: '1000 МБ/с',
+          description: 'Зовнішній SSD-диск у захищеному корпусі, з високою швидкістю передачі даних.'
+        },
+        {
+          id: 66,
+          name: 'Patriot P400 Lite',
+          brand: 'Patriot',
+          vram: '1000GB',
+          image: "images/Kompl/Patriot P400 Lite.jpg",
+          price: 3499,
+          vidd: 'M2',
+          FromFaktor: 'M.2 2280',
+          ReadSpeed: '5000 МБ/с',
+          WriteSpeed: '3500 МБ/с',
+          description: 'Баланс ціни та продуктивності для вимогливих користувачів.'
+        },
+        {
+          id: 67,
+          name: 'Patriot P210',
+          brand: 'Patriot',
+          vram: '256GB',
+          image: "images/Kompl/Patriot P210.jpg",
+          price: 699,
+          vidd: 'SATA',
+          FromFaktor: '2.5"',
+          ReadSpeed: '520 МБ/с',
+          WriteSpeed: '430 МБ/с',
+          description: 'Недорогий SSD-диск для заміни жорсткого диска в старих ноутбуках або ПК.'
+        },
+        {
+          id: 68,
+          name: 'Seagate BarraCuda 5400RPM',
+          brand: 'Seagate BarraCuda',
+          vram: '1000GB',
+          image: "images/Kompl/Seagate BarraCuda 5400RPM.jpg",
+          price: 1099,
+          vidd: 'HDD',
+          ReadSpeed: '140 МБ/с',
+          WriteSpeed: '120 МБ/с',
+          description: 'Надійний жорсткий диск зі швидкістю обертання 5400 об/хв — ідеально для зберігання великих обсягів даних.'
+        },
+        {
+          id: 69,
+          name: 'Seagate BarraCuda 7200RPM',
+          brand: 'Seagate BarraCuda',
+          vram: '2000GB',
+          image: "images/Kompl/Seagate BarraCuda 7200RPM.jpg",
+          price: 2349,
+          vidd: 'HDD',
+          ReadSpeed: '160 МБ/с',
+          WriteSpeed: '150 МБ/с',
+          description: 'Жорсткий диск зі швидкістю 7200 об/хв — краща продуктивність для повсякденного використання.'
+        },
+        {
+          id: 70,
+          name: 'Seagate BarraCuda 5600RPM',
+          brand: 'Seagate BarraCuda',
+          vram: '4000GB',
+          image: "images/Kompl/Seagate BarraCuda 5600RPM.jpg",
+          price: 4499,
+          vidd: 'HDD',
+          ReadSpeed: '145 МБ/с',
+          WriteSpeed: '125 МБ/с',
+          description: 'Диск великого обсягу зі швидкістю 5600 об/хв — хороший компроміс між ціною та швидкістю.'
+        },
+        {
+          id: 71,
+          name: 'Toshiba P300 HDWD320UZSVA',
+          brand: 'Toshiba',
+          vram: '2000GB',
+          image: "images/Kompl/Toshiba P300 HDWD320UZSVA.jpg",
+          price: 1999,
+          vidd: 'HDD',
+          ReadSpeed: '160 МБ/с',
+          WriteSpeed: '150 МБ/с',
+          description: 'Надійний диск для настільних ПК з хорошою швидкістю передачі даних.'
+        },
+        {
+          id: 72,
+          name: 'Toshiba DT01ACA100',
+          brand: 'Toshiba',
+          vram: '1000GB',
+          image: "images/Kompl/Toshiba DT01ACA100.jpg",
+          price: 999,
+          vidd: 'HDD',
+          ReadSpeed: '150 МБ/с',
+          WriteSpeed: '130 МБ/с',
+          description: 'Класичний HDD для базового використання з достатньою швидкістю.'
+        },
+        {
+          id: 73,
+          name: 'Toshiba P300 HDWD260UZSVA',
+          brand: 'Toshiba',
+          vram: '6000GB',
+          image: "images/Kompl/Toshiba P300 HDWD260UZSVA.jpg",
+          price: 6499,
+          vidd: 'HDD',
+          ReadSpeed: '175 МБ/с',
+          WriteSpeed: '160 МБ/с',
+          description: 'Великий обсяг для резервного копіювання та зберігання відео/фотоархівів.'
+        },
+        {
+          id: 74,
+          name: 'Western Digital Purple WD10PURZ',
+          brand: 'Western Digital',
+          vram: '1000GB',
+          image: "images/Kompl/Western Digital Purple WD10PURZ.jpg",
+          price: 1099,
+          vidd: 'HDD',
+          ReadSpeed: '145 МБ/с',
+          WriteSpeed: '120 МБ/с',
+          description: 'Спеціально розроблений для відеоспостереження — працює стабільно 24/7.'
+        },
+        {
+          id: 75,
+          name: 'Western Digital Blue WD40EZAX',
+          brand: 'Western Digital',
+          vram: '4000GB',
+          image: "images/Kompl/Western Digital Blue WD40EZAX.jpg",
+          price: 4699,
+          vidd: 'HDD',
+          ReadSpeed: '150 МБ/с',
+          WriteSpeed: '130 МБ/с',
+          description: 'Диск з великою місткістю — оптимальний варіант для архівації та мультимедійних колекцій.'
+        },
+        {
+          id: 76,
+          name: 'Aerocool Viewport Mini-G-V2 Tempered Glass',
+          brand: 'Aerocool',
+          image: "images/Kompl/Aerocool Viewport Mini-G-V2 Tempered Glass.jpg",
+          price: 2099,
+          description: 'Компактний корпус із загартованим склом, підходить для Micro-ATX і Mini-ITX збірок.',
+          FormFaktor: 'Micro-ATX, ITX',
+          Type: 'Mini Tower',
+          Slots: '4 слоти розширення'
+        },
+        {
+          id: 77,
+          name: 'Aerocool D502A-G-V1',
+          brand: 'Aerocool',
+          image: "images/Kompl/Aerocool D502A-G-V1.jpg",
+          price: 3599,
+          description: 'Просторий корпус з гарною вентиляцією та підтримкою ATX плат.',
+          FormFaktor: 'ATX, Micro-ATX, ITX',
+          Type: 'Midi Tower',
+          Slots: '7 слотів розширення'
+        },
+        {
+          id: 78,
+          name: 'Cougar Airface Pro RGB',
+          brand: 'Cougar',
+          image: "images/Kompl/Cougar Airface Pro RGB.jpg",
+          price: 4499,
+          description: 'Корпус з RGB-підсвіткою та сітчастою передньою панеллю для максимального охолодження.',
+          FormFaktor: 'ATX, Micro-ATX, ITX',
+          Type: 'Midi Tower',
+          Slots: '7 слотів розширення'
+        },
+        {
+          id: 79,
+          name: 'Cougar FV150 RGB',
+          brand: 'Cougar',
+          image: "images/Kompl/Cougar FV150 RGB.jpg",
+          price: 4999,
+          description: 'Футуристичний корпус з повним боковим склом та RGB-підсвіткою.',
+          FormFaktor: 'ATX, Micro-ATX, ITX',
+          Type: 'Midi Tower',
+          Slots: '7 слотів розширення'
+        },
+        {
+          id: 80,
+          name: 'NZXT H7 Flow RGB',
+          brand: 'NZXT',
+          image: "images/Kompl/NZXT H7 Flow RGB.jpg",
+          price: 8999,
+          description: 'Преміальний корпус з чудовим потоком повітря та дизайном для ентузіастів.',
+          FormFaktor: 'ATX, Micro-ATX, ITX',
+          Type: 'Midi Tower',
+          Slots: '7 слотів розширення'
+        },
+        {
+          id: 81,
+          name: 'NZXT H5 Flow',
+          brand: 'NZXT',
+          image: "images/Kompl/NZXT H5 Flow.jpg",
+          price: 4499,
+          description: 'Компактний і стильний корпус з ефективним охолодженням.',
+          FormFaktor: 'ATX, Micro-ATX, ITX',
+          Type: 'Midi Tower',
+          Slots: '7 слотів розширення'
+        },
+        {
+          id: 82,
+          name: 'GAMEMAX Vista M Tempered',
+          brand: 'GAMEMAX',
+          image: "images/Kompl/GAMEMAX Vista M Tempered.png",
+          price: 4099,
+          description: 'Модний корпус з боковою панеллю зі скла та хорошою підтримкою охолодження.',
+          FormFaktor: 'Micro-ATX, ITX',
+          Type: 'Mini Tower',
+          Slots: '4 слоти розширення'
+        },
+        {
+          id: 83,
+          name: 'GAMEMAX Fortress Tempered Glass',
+          brand: 'GAMEMAX',
+          image: "images/Kompl/GAMEMAX Fortress Tempered Glass.png",
+          price: 1699,
+          description: 'Доступний корпус із загартованим склом та підтримкою повнорозмірних плат.',
+          FormFaktor: 'ATX, Micro-ATX, ITX',
+          Type: 'Midi Tower',
+          Slots: '7 слотів розширення'
+        },
+        {
+        id: 84,
+        name: 'EVOLVE UltraPart Platinum 8B',
+        brand: 'EVOLVE',
+        image: "images/Kompl/EVOLVE UltraPart Platinum 8B.jpg",
+        price: 279999,
+        description: 'Потужна флагманська станція для роботи та ігор на максимумі.',
+         
+          CPU: 'AMD Ryzen 9 7950X (4.5-5.7), 16 ядер',
+          Motherboard: 'X670E',
+          GPU: 'RTX 4090, 24 ГБ',
+          SSD: '2 ТБ NVMe',
+          SSDType: 'PCI-E Gen4 з підтримкою NVMe',
+          RAM: '64 ГБ, 6000 МГц (DDR5)',
+          PSU: '1000 Вт',
+          PSUSert: 'Platinum'
+        
+      },
+      {
+        id: 85,
+        name: 'EVOLVE UniversalCaster StreamMaster Pro',
+        brand: 'EVOLVE',
+        image: "images/Kompl/EVOLVE UniversalCaster StreamMaster Pro.jpg",
+        price: 169299,
+        description: 'Професійний ПК для стріму та продуктивних задач.',
+  
+          CPU: 'AMD Ryzen 9 7900X (4.7-5.6), 12 ядер',
+          Motherboard: 'X670',
+          GPU: 'RTX 4080, 16 ГБ',
+          SSD: '1 ТБ NVMe',
+          SSDType: 'PCI-E Gen4 з підтримкою NVMe',
+          RAM: '32 ГБ, 5600 МГц (DDR5)',
+          PSU: '850 Вт',
+          PSUSert: 'Gold'
+        
+      },
+      {
+        id: 86,
+        name: 'EVOLVE GamePart Gold 3B',
+        brand: 'EVOLVE',
+        image: "images/Kompl/EVOLVE GamePart Gold 3B.jpg",
+        price: 117999,
+        description: 'Ігровий ПК середнього рівня з балансом потужності та ціни.',
+         
+          CPU: 'AMD Ryzen 7 7700X (4.5-5.4), 8 ядер',
+          Motherboard: 'B650',
+          GPU: 'RTX 4070, 12 ГБ',
+          SSD: '1 ТБ NVMe',
+          SSDType: 'PCI-E Gen4',
+          RAM: '32 ГБ, 5200 МГц (DDR5)',
+          PSU: '750 Вт',
+          PSUSert: 'Gold'
+        
+      },
+      {
+        id: 87,
+        name: 'HEXO Gaming RTX5070 Pro',
+        brand: 'HEXO',
+        image: "images/Kompl/HEXO Gaming RTX5070 Pro.jpg",
+        price: 88999,
+        description: 'Продуктивна ігрова система для 2K-ігрового досвіду.',
+         
+          CPU: 'Intel Core i7-13700KF (3.4-5.4), 16 ядер',
+          Motherboard: 'Z690',
+          GPU: 'RTX 4070 Ti, 12 ГБ',
+          SSD: '1 ТБ NVMe',
+          SSDType: 'PCI-E Gen4',
+          RAM: '32 ГБ, 5200 МГц (DDR5)',
+          PSU: '850 Вт',
+          PSUSert: 'Gold'
+        
+      },
+      {
+        id: 88,
+        name: 'HEXO Gaming TwinFront Pro+',
+        brand: 'HEXO',
+        image: "images/Kompl/HEXO Gaming TwinFront Pro+.jpg",
+        price: 47999,
+        description: 'Доступний ПК для Full HD геймінгу з сучасними компонентами.',
+         
+          CPU: 'AMD Ryzen 5 5600 (3.5-4.4), 6 ядер',
+          Motherboard: 'B450',
+          GPU: 'RTX 3060, 12 ГБ',
+          SSD: '960 ГБ SSD',
+          SSDType: 'PCI-E NVMe',
+          RAM: '16 ГБ, 3200 МГц (DDR4)',
+          PSU: '650 Вт',
+          PSUSert: 'Bronze'
+        
+      },
+      {
+        id: 89,
+        name: 'Boxed Gaming RTX3060 Pro',
+        brand: 'Boxed',
+        image: "images/Kompl/Boxed Gaming RTX3060 Pro.jpg",
+        price: 28999,
+        description: 'Ігрова збірка для початківців з RTX 3060 та надійною основою.',
+         
+          CPU: 'Intel Core i5-12400F (2.5-4.4), 6 ядер',
+          Motherboard: 'B660',
+          GPU: 'RTX 3060, 12 ГБ',
+          SSD: '512 ГБ SSD',
+          SSDType: 'PCI-E',
+          RAM: '16 ГБ, 3200 МГц (DDR4)',
+          PSU: '600 Вт',
+          PSUSert: 'Bronze'
+        
+      },
+      {
+        id: 90,
+        name: 'Boxed Gaming RTX2080S Base',
+        brand: 'Boxed',
+        image: "images/Kompl/Boxed Gaming RTX2080S Base.png",
+        price: 3499,
+        description: 'Базова геймерська станція з RTX 2080 Super для бюджетного 2K геймінгу.',
+         
+          CPU: 'AMD Ryzen 5 5600 (3.5-4.4), 6 ядер',
+          Motherboard: 'B450',
+          GPU: 'RTX 2080 Super, 8 ГБ',
+          SSD: '960 ГБ SSD',
+          SSDType: 'PCI-E NVMe',
+          RAM: '16 ГБ, 3200 МГц (DDR4)',
+          PSU: '650 Вт',
+          PSUSert: 'Bronze'
+        
+      },
+      {
+        id: 91,
+        name: 'Asus ROG Strix SCAR 16 G635LX-RW082X',
+        brand: 'Asus',
+        image: "images/Kompl/Asus ROG Strix SCAR 16 G635LX-RW082X.jpg",
+        price: 259999,
+        description: 'Флагманський геймерський ноутбук з потужною начинкою та Mini LED дисплеєм.',
+
+          CPU: 'Intel Core i9-14900HX',
+          GPU: 'NVIDIA GeForce RTX 4090 16 ГБ',
+          Display: '16", 2560x1600, 240 Гц, Mini LED',
+          RAM: '32 ГБ DDR5',
+          Storage: '1 ТБ SSD',
+          OS: 'Windows 11 Home',
+          Weight: '2.5 кг'
+
+      },
+      {
+        id: 92,
+        name: 'Asus ROG Zephyrus G16 GU605CW-QR148X',
+        brand: 'Asus',
+        image: "images/Kompl/Asus ROG Zephyrus G16 GU605CW-QR148X.jpg",
+        price: 199999,
+        description: 'Легкий та потужний ноутбук для геймінгу й творчості.',
+         
+          CPU: 'Intel Core Ultra 9 185H',
+          GPU: 'NVIDIA GeForce RTX 4070 8 ГБ',
+          Display: '16", OLED, 2.5K, 240 Гц',
+          RAM: '32 ГБ LPDDR5X',
+          Storage: '1 ТБ SSD',
+          OS: 'Windows 11 Home',
+          Weight: '1.85 кг'
+        
+      },
+      {
+        id: 93,
+        name: 'MSI Vector A18 HX (A9WIG-220UA)',
+        brand: 'MSI',
+        image: "images/Kompl/MSI Vector A18 HX (A9WIG-220UA).jpg",
+        price: 169999,
+        description: 'Мобільна робоча станція для геймерів і розробників.',
+         
+          CPU: 'Intel Core i9-14900HX',
+          GPU: 'NVIDIA GeForce RTX 4080 12 ГБ',
+          Display: '18", 2560x1600, 240 Гц',
+          RAM: '32 ГБ DDR5',
+          Storage: '1 ТБ SSD',
+          OS: 'Windows 11 Pro',
+          Weight: '3.1 кг'
+        
+      },
+      {
+        id: 94,
+        name: 'MSI Prestige 16 AI+ Evo B2VMG',
+        brand: 'MSI',
+        image: "images/Kompl/MSI Prestige 16 AI+ Evo B2VMG.jpg",
+        price: 88999,
+        description: 'Стильний ультрабук для роботи з AI та мобільності.',
+         
+          CPU: 'Intel Core Ultra 7 155H',
+          GPU: 'Intel Arc Graphics',
+          Display: '16", 2560x1600, IPS',
+          RAM: '32 ГБ LPDDR5',
+          Storage: '1 ТБ SSD',
+          OS: 'Windows 11 Home',
+          Weight: '1.5 кг'
+        
+      },
+      {
+        id: 95,
+        name: 'MSI Modern 15 H AI C1MG (C1MG-099UA)',
+        brand: 'MSI',
+        image: "images/Kompl/MSI Modern 15 H AI C1MG (C1MG-099UA).jpg",
+        price: 43999,
+        description: 'Доступний ноутбук з новим Intel Core Ultra для повсякденної роботи.',
+         
+          CPU: 'Intel Core Ultra 5 125H',
+          GPU: 'Intel Arc Graphics',
+          Display: '15.6", Full HD, IPS',
+          RAM: '16 ГБ DDR5',
+          Storage: '512 ГБ SSD',
+          OS: 'Windows 11 Home',
+          Weight: '1.8 кг'
+        
+      },
+      {
+        id: 96,
+        name: 'Acer Swift 14 AI SF14-51 (NX.J2KEU.002)',
+        brand: 'Acer',
+        image: "images/Kompl/Acer Swift 14 AI SF14-51 (NX.J2KEU.002).jpg",
+        price: 56999,
+        description: 'Компактний ноутбук з нейропроцесором для AI-застосунків.',
+         
+          CPU: 'Qualcomm Snapdragon X Plus',
+          GPU: 'Qualcomm Adreno',
+          Display: '14", 2880x1800, OLED',
+          RAM: '16 ГБ LPDDR5X',
+          Storage: '512 ГБ SSD',
+          OS: 'Windows 11 Home ARM',
+          Weight: '1.3 кг'
+        
+      },
+      {
+        id: 97,
+        name: 'Acer Nitro 14 AN14-41 (NH.QSSEU.001)',
+        brand: 'Acer',
+        image: "images/Kompl/Acer Nitro 14 AN14-41 (NH.QSSEU.001).jpg",
+        price: 67499,
+        description: 'Компактний геймерський ноутбук на базі AMD Ryzen.',
+         
+          CPU: 'AMD Ryzen 7 8845HS',
+          GPU: 'NVIDIA GeForce RTX 4050 6 ГБ',
+          Display: '14", 2560x1600, 165 Гц',
+          RAM: '16 ГБ DDR5',
+          Storage: '1 ТБ SSD',
+          OS: 'Windows 11 Home',
+          Weight: '1.9 кг'
+        
+      },
+      {
+        id: 98,
+        name: 'Asus 27 ROG Strix XG27ACS-W',
+        brand: 'Asus',
+        image: "images/Kompl/Asus 27 ROG Strix XG27ACS-W.jpg",
+        price: 11999,
+         
+          Display: '16", 2560x1600',
+          Panel: 'IPS',
+          ResponseTime: '1 мс',
+          Brightness: '300 кд/м²',
+          AspectRatio: '16:9'
+        
+      },
+      {
+        id: 99,
+        name: 'Asus 24.5 TUF Gaming VG259Q3A',
+        brand: 'Asus',
+        image: "images/Kompl/Asus 24.5 TUF Gaming VG259Q3A.jpg",
+        price: 5999,
+         
+          Display: '16", 2560x1600',
+          Panel: 'IPS',
+          ResponseTime: '1 мс',
+          Brightness: '300 кд/м²',
+          AspectRatio: '16:9'
+        
+      },
+      {
+        id: 100,
+        name: 'MSI 26.5 MAG 271QP QD-OLED X24',
+        brand: 'MSI',
+        image: "images/Kompl/MSI 26.5 MAG 271QP QD-OLED X24.jpg",
+        price: 23999,
+         
+          Display: '16", 2560x1600',
+          Panel: 'OLED',
+          ResponseTime: '1 мс',
+          Brightness: '300 кд/м²',
+          AspectRatio: '16:9'
+        
+      },
+      {
+        id: 101,
+        name: 'MSI 27 MAG 275QF',
+        brand: 'MSI',
+        image: "images/Kompl/MSI 27 MAG 275QF.png",
+        price: 8999,
+         
+          Display: '16", 2560x1600',
+          Panel: 'IPS',
+          ResponseTime: '1 мс',
+          Brightness: '300 кд/м²',
+          AspectRatio: '16:9'
+        
+      },
+      {
+        id: 102,
+        name: 'MSI 21.45 Pro MP223',
+        brand: 'MSI',
+        image: "images/Kompl/MSI 21.45 Pro MP223.png",
+        price: 3999,
+         
+          Display: '16", 2560x1600',
+          Panel: 'VA',
+          ResponseTime: '1 мс',
+          Brightness: '300 кд/м²',
+          AspectRatio: '16:9'
+        
+      },
+      {
+        id: 103,
+        name: 'Gigabyte 27 M27Q Gaming',
+        brand: 'Gigabyte',
+        image: "images/Kompl/Gigabyte 27 M27Q Gaming.png",
+        price: 5999,
+         
+          Display: '16", 2560x1600',
+          Panel: 'IPS',
+          ResponseTime: '1 мс',
+          Brightness: '300 кд/м²',
+          AspectRatio: '16:9'
+        
+      },
+      {
+        id: 104,
+        name: 'Gigabyte 27 AORUS FO27Q2',
+        brand: 'Gigabyte',
+        image: "images/Kompl/Gigabyte 27 AORUS FO27Q2.jpg",
+        price: 29499,
+         
+          Display: '16", 2560x1600',
+          Panel: 'OLED',
+          ResponseTime: '1 мс',
+          Brightness: '300 кд/м²',
+          AspectRatio: '16:9'
+        
+      },
+      {
+        id: 105,
+        name: 'Logitech G102 Lightsync',
+        brand: 'Logitech',
+        image: "images/Kompl/Logitech G102 Lightsync.jpg",
+        price: 1299,
+        pidkl: 'Дротове',
+        DPI: '6000 dpi'
+        
+      },
+      {
+        id: 106,
+        name: 'Logitech Pro 2 Lightspeed',
+        brand: 'Logitech',
+        image: "images/Kompl/Logitech Pro 2 Lightspeed.jpg",
+        price: 5999,
+        pidkl: 'Бездротове',
+        DPI: '35000 dpi'
+        
+      },
+      {
+        id: 107,
+        name: 'Logitech G Pro X Superlight 2 Lightspeed Wireless',
+        brand: 'Logitech',
+        image: "images/Kompl/Logitech G Pro X Superlight 2 Lightspeed Wireless.jpg",
+        price: 6999,
+        pidkl: 'Бездротова',
+        DPI: '35000 dpi'
+        
+      },
+      {
+        id: 108,
+        name: 'HyperX Pulsefire Haste 2 Mini',
+        brand: 'HyperX',
+        image: "images/Kompl/HyperX Pulsefire Haste 2 Mini.jpg",
+        price: 3999,
+        pidkl: 'Комбіноване',
+        DPI: '15000 dpi'
+        
+      },
+      {
+        id: 109,
+        name: 'HyperX Pulsefire Haste 2',
+        brand: 'HyperX',
+        image: "images/Kompl/HyperX Pulsefire Haste 2.jpg",
+        price: 2999,
+        pidkl: 'Дротове',
+        DPI: '10000 dpi'
+        
+      },
+      {
+        id: 110,
+        name: 'Razer DeathAdder Essential',
+        brand: 'Razer',
+        image: "images/Kompl/Razer DeathAdder Essential.png",
+        price: 1399,
+        pidkl: 'Дротове',
+        DPI: '25000 dpi'
+        
+      },
+      {
+        id: 111,
+        name: 'Razer Viper V3 Pro Wireless',
+        brand: 'Razer',
+        image: "images/Kompl/Razer Viper V3 Pro Wireless.png",
+        price: 6499,
+        pidkl: 'Комбіноване',
+        DPI: '35000 dpi'
+        
+      },
+      {
+        id: 112,
+        name: 'Logitech G213 Prodigy Gaming',
+        brand: 'Logitech',
+        image: "images/Kompl/Logitech G213 Prodigy Gaming.jpg",
+        price: 2899,
+        pidkl: 'Дротове, USB',
+         
+          FromFaktor: 'Повнорозмірна (104 клавіші)',
+          Candle: 'Мембранні'
+        
+      },
+      {
+        id: 113,
+        name: 'Logitech G Pro X TKL LightSpeed Mechanical Tactile',
+        brand: 'Logitech',
+        image: "images/Kompl/Logitech G Pro X TKL LightSpeed Mechanical Tactile.jpg",
+        price: 8999,
+        pidkl: 'Комбіноване, Bluetooth + USB + Lightspeed',
+         
+
+          FromFaktor: 'TKL (без NumPad)',
+          Candle: 'Механічні (Tactile)'
+        
+      },
+      {
+        id: 114,
+        name: 'Logitech Pebble Keys 2 K380s',
+        brand: 'Logitech',
+        image: "images/Kompl/Logitech Pebble Keys 2 K380s.jpg",
+        price: 1999,
+        pidkl: 'Бездротове, Bluetooth',
+         
+
+          FromFaktor: 'Компактна',
+          Candle: 'Мембранні'
+        
+      },
+      {
+        id: 115,
+        name: 'HyperX Alloy Origins Core PBT RGB Mechnical',
+        brand: 'HyperX',
+        image: "images/Kompl/HyperX Alloy Origins Core PBT RGB Mechnical.jpg",
+        price: 3999,
+        pidkl: 'Дротове, USB-C',
+         
+
+          FromFaktor: 'TKL',
+          Candle: 'Механічні (HyperX Red)'
+        
+      },
+      {
+        id: 116,
+        name: 'HyperX Alloy Rise 75 PBT RGB Mechnical',
+        brand: 'HyperX',
+        image: "images/Kompl/HyperX Alloy Rise 75 PBT RGB Mechnical.jpg",
+        price: 10359,
+        pidkl: 'Комбіноване, Bluetooth + USB + 2.4GHz',
+         
+
+          FromFaktor: '75%',
+          Candle: 'Механічні (Hot-Swap)'
+        
+      },
+      {
+        id: 117,
+        name: 'Razer Ornata V3 X',
+        brand: 'Razer',
+        image: "images/Kompl/Razer Ornata V3 X.jpg",
+        price: 2399,
+        pidkl: 'Дротове, USB',
+         
+
+          FromFaktor: 'Повнорозмірна',
+          Candle: 'Мембранні'
+        
+      },
+      {
+        id: 118,
+        name: 'Razer DeathStalker V2 Pro Wireless Clicky',
+        brand: 'Razer',
+        image: "images/Kompl/Razer DeathStalker V2 Pro Wireless Clicky.png",
+        price: 12499,
+        pidkl: 'Комбіноване, Bluetooth + USB + 2.4GHz',
+         
+
+          FromFaktor: 'Повнорозмірна',
+          Candle: 'Механічні (Clicky Optical)'
+        
+      },
+
+      {
+        id: 119,
+        name: 'Logitech G435 Lightspeed (981-001074)',
+        brand: 'Logitech',
+        image: "images/Kompl/Logitech G435 Lightspeed (981-001074).jpg",
+        price: 4899,
+        pidkl: 'Бездротове, Bluetooth + Lightspeed'
+      },
+      {
+        id: 120,
+        name: 'Logitech PRO X Gaming',
+        brand: 'Logitech',
+        image: "images/Kompl/Logitech PRO X Gaming.jpg",
+        price: 6799,
+        pidkl: 'Дротове, 3.5 мм Jack + USB DAC'
+      },
+      {
+        id: 121,
+        name: 'HyperX Cloud Alpha',
+        brand: 'HyperX',
+        image: "images/Kompl/HyperX Cloud Alpha.png",
+        price: 3599,
+        pidkl: 'Дротове, 3.5 мм Jack'
+      },
+      {
+        id: 122,
+        name: 'HyperX Cloud Stinger 2 Core',
+        brand: 'HyperX',
+        image: "images/Kompl/HyperX Cloud Stinger 2 Core.jpg",
+        price: 1499,
+        pidkl: 'Дротове, 3.5 мм Jack'
+      },
+      {
+        id: 123,
+        name: 'HyperX Cloud III',
+        brand: 'HyperX',
+        image: "images/Kompl/HyperX Cloud III.jpg",
+        price: 3859,
+        pidkl: 'Дротове, 3.5 мм Jack / USB-C / USB-A'
+      },
+      {
+        id: 124,
+        name: 'Razer BlackShark V2 X',
+        brand: 'Razer',
+        image: "images/Kompl/Razer BlackShark V2 X.png",
+        price: 2399,
+        pidkl: 'Дротове, 3.5 мм Jack'
+      },
+      {
+        id: 125,
+        name: 'Razer Barracuda X 2022',
+        brand: 'Razer',
+        image: "images/Kompl/Razer Barracuda X 2022.jpg",
+        price: 5499,
+        pidkl: 'Комбіноване, Bluetooth + 2.4GHz Wireless + USB-C'
+      },
+      {
+        id: 126,
+        name: 'Sony PlayStation 5',
+        brand: 'Sony',
+        image: "images/Kompl/Sony PlayStation 5.jpg",
+        price: 22899,
+         
+          CPU: 'AMD Zen 2 8-core',
+          GPU: 'AMD RDNA 2, 10.28 TFLOPs',
+          Storage: '825 GB SSD'
+        
+      },
+      {
+        id: 127,
+        name: 'Sony PlayStation 4',
+        brand: 'Sony',
+        image: "images/Kompl/Sony PlayStation 4.jpg",
+        price: 7499,
+         
+          CPU: 'AMD Jaguar 8-core',
+          GPU: 'AMD GCN, 1.84 TFLOPs',
+          Storage: '500 GB HDD'
+        
+      },
+      {
+        id: 128,
+        name: 'Xbox Series X',
+        brand: 'Xbox',
+        image: "images/Kompl/Xbox Series X.jpg",
+        price: 35599,
+         
+          CPU: 'AMD Zen 2 8-core',
+          GPU: 'AMD RDNA 2, 12 TFLOPs',
+          Storage: '1 TB SSD'
+        
+      },
+      {
+        id: 129,
+        name: 'Xbox Series S',
+        brand: 'Xbox',
+        image: "images/Kompl/Xbox Series S.jpg",
+        price: 16499,
+         
+          CPU: 'AMD Zen 2 8-core',
+          GPU: 'AMD RDNA 2, 4 TFLOPs',
+          Storage: '512 GB SSD'
+        
+      },
+      {
+        id: 130,
+        name: 'Valve Steam Deck',
+        brand: 'Valve',
+        image: "images/Kompl/Valve Steam Deck.webp",
+        price: 30999,
+         
+          CPU: 'AMD Zen 2 4-core',
+          GPU: 'AMD RDNA 2, 1.6 TFLOPs',
+          Storage: '512 GB NVMe SSD'
+        
+      },
+      {
+        id: 131,
+        name: 'Xerox Phaser 3020BI',
+        brand: 'Xerox',
+        image: "images/Kompl/Xerox Phaser 3020BI.jpg",
+        price: 4899,
+         
+          Type: 'Монохромний лазерний',
+          DPI: '1200 x 1200',
+          speed: '20 стор/хв',
+          vidd: 'Wi-Fi, USB 2.0'
+        
+      },
+      {
+        id: 132,
+        name: 'Xerox C230',
+        brand: 'Xerox',
+        image: "images/Kompl/Xerox C230.jpg",
+        price: 17499,
+         
+          Type: 'Кольоровий лазерний',
+          DPI: '600 x 600',
+          speed: '22 стор/хв',
+          vidd: 'Wi-Fi, Ethernet, USB'
+        
+      },
+      {
+        id: 133,
+        name: 'HP Color Laser 150nw з Wi-Fi',
+        brand: 'HP',
+        image: "images/Kompl/HP Color Laser 150nw з Wi-Fi.jpg",
+        price: 13599,
+         
+          Type: 'Кольоровий лазерний',
+          DPI: '600 x 600',
+          speed: '18 стор/хв (моно), 4 стор/хв (кольор)',
+          vidd: 'Wi-Fi, Ethernet, USB 2.0'
+        
+      },
+      {
+        id: 134,
+        name: 'HP Color LJ Pro 4203dw',
+        brand: 'HP',
+        image: "images/Kompl/HP Color LJ Pro 4203dw.jpg",
+        price: 25499,
+         
+          Type: 'Кольоровий лазерний',
+          DPI: '1200 x 1200',
+          speed: '35 стор/хв',
+          vidd: 'Wi-Fi, Ethernet, USB'
+        
+      },
+      {
+        id: 135,
+        name: 'HP LaserJet M211d',
+        brand: 'HP',
+        image: "images/Kompl/HP LaserJet M211d.jpg",
+        price: 7999,
+         
+          Type: 'Монохромний лазерний',
+          DPI: '600 x 600',
+          speed: '29 стор/хв',
+          vidd: 'USB 2.0'
+        
+      }
+
+
+
+
+
+
+
+
+
+        ];
+
+        function getProductById(id) {
+          return products.find(p => p.id === parseInt(id));
+        }
+
+        onMounted(() => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const id = urlParams.get('id');
+          product.value = getProductById(id);
+        });
+
+        return { product };
+      }
+    }).mount('#app');
+  </script>
+
+
+     <hr>
+    <section class="text">
+ <div class="logo1">
+            <img src="images/logo.png" alt="PCDAY.UA ">
+            <span> <span style="color: orange; font-size: 29px; font-weight: 600;">PCDAY.UA</span> - каталог описів і цін на побутову і комп'ютерну техніку та переферію. Наше завдання — допомогти підібрати і купити потрібну модель за
+                найкращою ціною в інтернет-магазинах. В каталозі можна знайти всю необхідну для вибору інформацію — порівняння товарів, підбір моделей за
+                параметрами, детальні описи, пошук товару за назвою, відгуки користувачів, фотогалереї товарів, глосарій термінів, огляди, інструкції, рейтинг товарів,
+                рекомендації експертів, каталог брендів і багато іншого.</span>
+        </div>
+        
+    </section>
+    <hr>
+  <!-- Футер -->
+  <footer class="footer">
+    <div class="footer-section">
+      <h3>Про проєкт</h3>
+      <ul>
+        <li><a href="#">Як нам зателефонувати?</a></li>
+        <li><a href="#">Розміщення прайс-листів</a></li>
+        <li><a href="#">Магазинам</a></li>
+        <li><a href="#">Політика конфіденційності</a></li>
+        <li><a href="#" class="highlight">Запитання й побажання щодо сайту</a></li>
+        <li><a href="#">Популяризувати проєкт <span class="plus">➕</span></a></li>
+      </ul>
+      <p class="copyright">© PCDAY.UA, 2024-2025</p>
+    </div>
+
+    <div class="footer-section">
+      <h3>Ми в інших країнах</h3>
+      <ul>
+        <li><a href="#">Україна</a></li>
+        <li><a href="#">Велика Британія</a></li>
+        <li><a href="#">США</a></li>
+        <li><a href="#">Польща</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Ваш регіон</h3>
+      <p>Україна, UA</p>
+      <p>Запоріжжя <span class="location-icon">📍</span></p>
+      <div class="social-icons">
+        <a href="#"><img src="images/icon/facebook.svg" alt="Facebook"></a>
+        <a href="#"><img src="images/icon/inst.svg" alt="Instagram"></a>
+        <a href="#"><img src="images/icon/telegram.svg" alt="Telegram"></a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+

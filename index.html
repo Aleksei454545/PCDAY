@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCDAY.UA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/logo.png">
+</head>
+<body>
+    
+    <!-- Шапка -->
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="images/logo.png" alt="PCDAY.UA"></a>
+             <a href="index.html"><span>PCDAY.UA</span></a>
+        </div>
+        <div class="tagline">
+            <img src="images/dev.png" alt="Developer">
+            <h1>Вибір для будь-якої потреби!</h1>
+            <img src="images/gamer.png" alt="Gamer">
+        </div>
+        <div class="user-actions" id="navbar">
+      <a href="ContactUs.html">🔒 Увійти</a>
+      <a href="ContactUs.html">👤 Зареєструватися</a>
+        </div>
+
+
+  <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const userName = localStorage.getItem('userName');
+
+    if (userName) {
+      const firstLetter = userName[0].toUpperCase();
+
+
+      const userContainer = document.createElement('div');
+      userContainer.style.display = 'flex';
+      userContainer.style.alignItems = 'center';
+      userContainer.style.gap = '10px';
+      userContainer.style.position = 'relative';
+
+
+      const avatar = document.createElement('div');
+      avatar.textContent = firstLetter;
+      avatar.style.width = '40px';
+      avatar.style.height = '40px';
+      avatar.style.borderRadius = '50%';
+      avatar.style.backgroundColor = '#4ea0ff';
+      avatar.style.color = 'white';
+      avatar.style.display = 'flex';
+      avatar.style.alignItems = 'center';
+      avatar.style.justifyContent = 'center';
+      avatar.style.fontWeight = 'bold';
+      avatar.style.fontSize = '18px';
+      avatar.style.cursor = 'pointer';
+      avatar.id = 'userAvatar';
+
+
+      const nameSpan = document.createElement('span');
+      nameSpan.textContent = userName;
+      nameSpan.style.color = 'white';
+      nameSpan.style.fontSize = '16px';
+      nameSpan.style.fontWeight = '500';
+
+
+      const dropdown = document.createElement('div');
+      dropdown.id = 'userMenu';
+      dropdown.style.position = 'absolute';
+      dropdown.style.top = '50px';
+      dropdown.style.right = '0';
+      dropdown.style.backgroundColor = '#1a1a1a';
+      dropdown.style.border = '1px solid #333';
+      dropdown.style.borderRadius = '6px';
+      dropdown.style.padding = '10px';
+      dropdown.style.display = 'none';
+      dropdown.style.minWidth = '120px';
+      dropdown.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+
+      const logoutBtn = document.createElement('button');
+      logoutBtn.textContent = 'Вийти';
+      logoutBtn.style.background = 'none';
+      logoutBtn.style.border = 'none';
+      logoutBtn.style.color = 'white';
+      logoutBtn.style.cursor = 'pointer';
+      logoutBtn.style.fontSize = '14px';
+      logoutBtn.style.padding = '5px';
+      logoutBtn.style.width = '100%';
+      logoutBtn.onmouseover = () => logoutBtn.style.backgroundColor = '#333';
+      logoutBtn.onmouseout = () => logoutBtn.style.backgroundColor = 'transparent';
+
+      logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('userName');
+        location.reload();
+      });
+
+      dropdown.appendChild(logoutBtn);
+
+      const navbar = document.getElementById('navbar');
+      navbar.innerHTML = '';
+
+
+
+
+      userContainer.appendChild(nameSpan);
+      userContainer.appendChild(avatar);
+      userContainer.appendChild(dropdown);
+      navbar.appendChild(userContainer);
+
+
+
+      
+      avatar.addEventListener('click', () => {
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+      });
+
+
+      document.addEventListener('click', (e) => {
+        if (!avatar.contains(e.target) && !dropdown.contains(e.target)) {
+          dropdown.style.display = 'none';
+        }
+      });
+    }
+  });
+</script>
+
+
+
+
+    </header>
+           <hr>
+    <!-- Меню -->
+<nav>
+    <section>
+        <ul class="vertical-menu">
+     <!--   <li><a href="#"><img src="images/icon/konfigur def.svg" alt="ПК"> Конфігуратор ПК</a></li> -->  <!--Работа с базой данных -->
+            <li><a href="list.html"><img src="images/icon/kompl.svg" alt="Комплектуючі"> Комплектуючі</a></li>
+            <li><a href="Komp.html"><img src="images/icon/c2.svg" alt="Комп'ютери"> Комп'ютери</a></li>
+            <li><a href="Note.html"><img src="images/icon/c3.svg" alt="Ноутбуки"> Ноутбуки</a></li>
+            <li><a href="Monitor.html"><img src="images/icon/c7.svg" alt="Монітори"> Монітори</a></li>
+            <li><a href="list2.html"><img src="images/icon/c5.svg" alt="Периферія"> Периферія</a></li>
+            <li><a href="Consoles.html"><img src="images/icon/c4.svg" alt="Консольний геймінг"> Консольний геймінг</a></li>
+            <li><a href="Org.html"><img src="images/icon/c9.svg" alt="Оргтехніка"> Оргтехніка</a></li>
+        </ul>
+    </section>
+</nav>
+
+
+
+
+
+
+    <!-- Блок с баннерами -->
+
+    <div class="banner-wrapper">
+        <a href="#"><div class="banner-container"><img  src="images/Ryzen banner.jpg" alt="Ryzen "></div></a>
+        <a href="#"><div class="banner-container1"><img  src="images/MSI баннер.jpg" alt="Msi"></div></a>
+        <a href="#"><div class="banner-container2"><img  src="images/5090 Баннер.png" alt="5090"></div></a>
+        <a href="#"><div class="banner-container3"><img  src="images/asrock banner.jpg" alt="Asus"></div></a>
+    </div>
+
+  
+    <!-- Популярные запросы -->
+    <section class="popular-queries">
+        <h2>Популярні запити</h2>
+        <div class="tags">
+            <a href="Video.html?brand=NVIDIA"><span><img src="images/icon/pq-1.png" alt="Nvidia"> Відеокарти Nvidia</span></a>
+            <a href="Proc.html?brand=Intel"><span><img src="images/icon/pq-2.png" alt="Intel"> Процесори Intel</span></a>
+            <a href="Video.html?brand=AMD"><span><img src="images/icon/newpq-5.png" alt="AMD"> Відеокарти AMD</span></a>
+            <a href="Proc.html?brand=AMD"><span><img src="images/icon/newpq-6.svg" alt="AMD CPU"> Процесори AMD</span></a>
+            <a href="mouse.html"><span><img src="images/icon/pq-9.png" alt="Mouse"> Ігрові мишки</span></a>
+            <a href="klava.html"><span><img src="images/icon/pq-10.png" alt="Keyboard"> Ігрові клавіатури</span></a>
+            <a href="Mat.html?vid=INTEL"><span><img src="images/icon/pq-3.png" alt="Intel MB"> Материнські плати для Intel</span></a>
+            <a href="Mat.html?vid=AMD"><span><img src="images/icon/pq-7.png" alt="AMD MB"> Материнські плати для AMD</span></a>
+            <a href="headphone.html"><span><img src="images/icon/pq-11.png" alt="Headset"> Ігрові навушники</span></a>
+            <a href="Ram.html?brand=ADATA"><span><img src="images/icon/pq-4.png" alt="RAM"> Оперативна пам’ять ADATA</span></a>
+            <a href="Komp.html"><span><img src="images/icon/pq-8.png" alt="PC"> Ігрові ПК</span></a>
+
+        </div>
+    </section>
+    <hr>
+       <!-- Новинки -->
+<section class="nov">
+    <h2>Новинки</h2>
+</section>
+
+    <div class="novelties">
+        <div class="novelties-column">
+            <a href="Tovar.html?id=1">Radeon RX 9070</a>
+            <a href="Tovar.html?id=2">Radeon RX 9070 XT</a>
+            <a href="Tovar.html?id=3">GeForce RTX 5060</a>
+            <a href="Tovar.html?id=4">GeForce RTX 5060TI</a>
+            <a href="Tovar.html?id=5">GeForce RTX 5070</a>
+            <a href="Tovar.html?id=6">GeForce RTX 5080</a>
+            <a href="Tovar.html?id=7">GeForce RTX 5090</a>
+        </div>
+        <div class="novelties-column">
+            <a href="Tovar.html?id=8">Ryzen 9 9950X3D</a>
+            <a href="Tovar.html?id=9">Ryzen 9 9900X3D</a>
+            <a href="Tovar.html?id=10">Intel® CoreTM Ultra 200S</a>
+            <a href="Tovar.html?id=11">Intel® CoreTM Ultra 200HX</a>
+            <a href="Tovar.html?id=12">Intel® CoreTM Ultra 200KF</a>
+            <a href="Tovar.html?id=13">Intel® CoreTM Ultra 200U</a>
+            <a href="Tovar.html?id=14">Intel® CoreTM Ultra 200V</a>
+        </div>
+        <div class="novelties-column">
+            <a href="Tovar.html?id=15">Kingston FURY Beast Black</a>
+            <a href="Tovar.html?id=16">ADATA XPG Lancer Blade</a>
+            <a href="Tovar.html?id=17">ADATA XPG SPECTRIX D35G</a>
+            <a href="Tovar.html?id=18">ADATA XPG Lancer</a>
+            <a href="Tovar.html?id=19">Kingston Fury Beast Black RGB</a>
+            <a href="Tovar.html?id=20">ADATA XPG GAMMIX D35</a>
+            <a href="Tovar.html?id=21">G. Skill Ripjaws S5</a>
+            <a href="Tovar.html?id=22">G. Skill Aegis</a>
+        </div>
+        <div class="novelties-column">
+            <a href="Tovar.html?id=23">Asus ROG STRIX B850-A GAMING WIFI</a>
+            <a href="Tovar.html?id=24">Asus TUF GAMING B850-PLUS WIFI</a>
+            <a href="Tovar.html?id=25">Asus TUF GAMING B850M-PLUS WIFI</a>
+            <a href="Tovar.html?id=26">Gigabyte B850 AORUS ELITE WIFI7</a>
+            <a href="Tovar.html?id=27">ASRock B850 Pro RS WiFi</a>
+            <a href="Tovar.html?id=28">MSI MPG X870E EDGE TI WIFI</a>
+            <a href="Tovar.html?id=29">Asus ROG STRIX B860-F GAMING WIFI</a>
+            <a href="Tovar.html?id=30">Gigabyte B850 GAMING WIFI6</a>
+        </div>
+        <div class="novelties-column">
+            <a href="Tovar.html?id=31">Cougar GLE</a>
+            <a href="Tovar.html?id=32">Cougar GLE 1000</a>
+            <a href="Tovar.html?id=33">NZXT C1200W</a>
+            <a href="Tovar.html?id=34">Vinga VPS Bronze B1</a>
+            <a href="Tovar.html?id=35">Corsair CV650</a>
+            <a href="Tovar.html?id=36">Corsair SF1000</a>
+            <a href="Tovar.html?id=37">be quiet! Power Zone 2</a>
+        </div>
+    </div>
+    <hr>
+    <section class="text">
+        <div class="logo1">
+            <img src="images/logo.png" alt="PCDAY.UA ">
+            <span> <span style="color: orange; font-size: 29px; font-weight: 600;">PCDAY.UA</span> - каталог описів і цін на побутову і комп'ютерну техніку та переферію. Наше завдання — допомогти підібрати і купити потрібну модель за
+                найкращою ціною в інтернет-магазинах. В каталозі можна знайти всю необхідну для вибору інформацію — порівняння товарів, підбір моделей за
+                параметрами, детальні описи, пошук товару за назвою, відгуки користувачів, фотогалереї товарів, глосарій термінів, огляди, інструкції, рейтинг товарів,
+                рекомендації експертів, каталог брендів і багато іншого.</span>
+        </div>
+        
+    </section>
+    <hr>
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-section">
+            <h3>Про проєкт</h3>
+            <ul>
+                <li><a href="ContactUs.html">Як нам зателефонувати?</a></li>
+                <li><a href="ContactUs.html">Розміщення прайс-листів</a></li>
+                <li><a href="ContactUs.html">Магазинам</a></li>
+                <li><a href="ContactUs.html">Політика конфіденційності</a></li>
+                <li><a href="ContactUs.html" class="highlight">Запитання й побажання щодо сайту</a></li>
+                <li><a href="ContactUs.html">Популяризувати проєкт <span class="plus">➕</span></a></li>
+            </ul>
+            <p class="copyright">© PCDAY.UA, 2024-2025</p>
+        </div>
+        
+        <div class="footer-section">
+            <h3>Ми в інших країнах</h3>
+            <ul>
+                <li><a href="ContactUs.html">Україна</a></li>
+                <li><a href="ContactUs.html">Велика Британія</a></li>
+                <li><a href="ContactUs.html">США</a></li>
+                <li><a href="ContactUs.html">Польща</a></li>
+            </ul>
+        </div>
+    
+        <div class="footer-section">
+            <h3>Ваш регіон</h3>
+            <p>Україна, UA</p>
+            <p>Запоріжжя <span class="location-icon">📍</span></p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/durov/?locale=uk_UA"><img src="images/icon/facebook.svg" alt="Facebook"></a>
+                <a href="https://www.instagram.com/vaseiko.aleksei/"><img src="images/icon/inst.svg" alt="Instagram"></a>
+                <a href="https://t.me/+kGvM9YXaPNcyMDgy"><img src="images/icon/telegram.svg" alt="Telegram"></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

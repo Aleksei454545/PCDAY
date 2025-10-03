@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCDAY.UA</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+</head>
+<body>
+  <!-- Шапка -->
+  <header>
+    <div class="logo">
+      <a href="index.html"><img src="images/logo.png" alt="PCDAY.UA"></a>
+      <a href="index.html"><span>PCDAY.UA</span></a>
+    </div>
+    <div class="tagline">
+      <img src="images/dev.png" alt="Developer">
+      <h1>Вибір для будь-якої потреби!</h1>
+      <img src="images/gamer.png" alt="Gamer">
+    </div>
+    <div class="user-actions">
+      <a href="#">🔒 Увійти</a>
+      <a href="#">👤 Зареєструватися</a>
+    </div>
+  </header>
+  <hr>
+
+<div class="logo1" style="padding-left:13%;padding-right:8%;padding-top:1%;padding-bottom:1%">
+
+<span> <span style="color: orange; font-size: 29px; font-weight: 600;"> Комп'ютерна клавіатура</span> 
+— пристрій, що дозволяє користувачеві вводити інформацію в комп'ютер (пристрій введення).
+Зазвичай вона містить близько 104 клавіш, включаючи повну розкладку QWERTY з цифровим рядом угорі та кількома клавішами-модифікаторами (Shift, Ctrl, Alt),
+ ряд функціональних клавіш, навігаційний кластер із 4 клавішами зі стрілками під ним і цифрову клавіатуру.</span>
+</div>
+<hr>
+
+<section class="catalog" id="app">
+  <div class="sidebar">
+    <div class="filter-group">
+      <h4>Виробник</h4>
+      <label><input type="checkbox" value="Logitech" v-model="filters.brands"> Logitech</label><br>
+      <label><input type="checkbox" value="HyperX" v-model="filters.brands"> HyperX</label><br>
+      <label><input type="checkbox" value="Razer" v-model="filters.brands"> Razer</label>
+    </div>
+<div class="filter-group">
+      <h4>Підключення</h4>
+      <label><input type="checkbox" value="Дротове" v-model="filters.vid"> Дротове</label><br>
+      <label><input type="checkbox" value="Бездротове" v-model="filters.vid"> Бездротове</label><br>
+      <label><input type="checkbox" value="Комбіноване" v-model="filters.vid"> Комбіноване</label>
+    </div>
+
+  </div>
+
+
+  <div class="product-list">
+    <div v-for="product in filteredProducts" :key="product.id" class="product-card">
+      <div class="product-img">
+         <a :href="'Tovar.html?id=' + product.id">
+        <img :src="product.image" :alt="product.name" style="max-width: 250px; max-height: 250px;">
+      </a>
+
+      </div>
+      <h4 style="font-size: 18px;">
+        
+    <a :href="'Tovar.html?id=' + product.id" style="color:#2c5ce2;">{{ product.name }}</a>
+</h4>
+
+      
+
+        <p>Виробник: {{ product.brand }}</p>
+        <p style="color: #3382f8;font-weight:600;font-size:large">Ціна: {{ product.price }}</p>
+
+    </div>
+  </div>
+</section>
+
+
+  <script>
+  const { createApp, ref, computed } = Vue;
+
+  createApp({
+    setup() {
+      const products = ref([
+      { id: 112, name: 'Logitech G213 Prodigy Gaming', brand: 'Logitech', image: "images/Kompl/Logitech G213 Prodigy Gaming.jpg", price: 2899,vid: 'Дротове' },///
+      { id: 113, name: 'Logitech G Pro X TKL LightSpeed Mechanical Tactile', brand: 'Logitech', image: "images/Kompl/Logitech G Pro X TKL LightSpeed Mechanical Tactile.jpg", price: 8999,vid: 'Комбіноване' },
+      { id: 114, name: 'Logitech Pebble Keys 2 K380s', brand: 'Logitech',  image: "images/Kompl/Logitech Pebble Keys 2 K380s.jpg", price: 1999,vid: 'Бездротове' },
+      { id: 115, name: 'HyperX Alloy Origins Core PBT RGB Mechnical', brand: 'HyperX',  image: "images/Kompl/HyperX Alloy Origins Core PBT RGB Mechnical.jpg", price: 3999,vid: 'Дротове' },
+      { id: 116, name: 'HyperX Alloy Rise 75 PBT RGB Mechnical', brand: 'HyperX',  image: "images/Kompl/HyperX Alloy Rise 75 PBT RGB Mechnical.jpg", price: 10359,vid: 'Комбіноване' },
+      { id: 117, name: 'Razer Ornata V3 X', brand: 'Razer', image: "images/Kompl/Razer Ornata V3 X.jpg", price: 2399,vid: 'Дротове' },
+      { id: 118, name: 'Razer DeathStalker V2 Pro Wireless Clicky', brand: 'Razer', image: "images/Kompl/Razer DeathStalker V2 Pro Wireless Clicky.png", price: 12499,vid: 'Комбіноване' }
+      
+    ]);
+    
+
+      const filters = ref({
+        brands: [],
+        vid: []
+      });
+
+      const filteredProducts = computed(() => {
+        return products.value.filter(product => {
+          const matchBrand = filters.value.brands.length === 0 || filters.value.brands.includes(product.brand);
+          const matchVid = filters.value.vid.length === 0 || filters.value.vid.includes(product.vid)
+          return matchBrand && matchVid ;
+        });
+      });
+
+      return {
+        products,
+        filters,
+        filteredProducts
+      };
+    }
+  }).mount('#app');
+</script>
+
+
+
+
+
+
+     <hr>
+    <section class="text">
+ <div class="logo1">
+            <img src="images/logo.png" alt="PCDAY.UA ">
+            <span> <span style="color: orange; font-size: 29px; font-weight: 600;">PCDAY.UA</span> - каталог описів і цін на побутову і комп'ютерну техніку та переферію. Наше завдання — допомогти підібрати і купити потрібну модель за
+                найкращою ціною в інтернет-магазинах. В каталозі можна знайти всю необхідну для вибору інформацію — порівняння товарів, підбір моделей за
+                параметрами, детальні описи, пошук товару за назвою, відгуки користувачів, фотогалереї товарів, глосарій термінів, огляди, інструкції, рейтинг товарів,
+                рекомендації експертів, каталог брендів і багато іншого.</span>
+        </div>
+        
+    </section>
+    <hr>
+  <!-- Футер -->
+  <footer class="footer">
+    <div class="footer-section">
+      <h3>Про проєкт</h3>
+      <ul>
+        <li><a href="#">Як нам зателефонувати?</a></li>
+        <li><a href="#">Розміщення прайс-листів</a></li>
+        <li><a href="#">Магазинам</a></li>
+        <li><a href="#">Політика конфіденційності</a></li>
+        <li><a href="#" class="highlight">Запитання й побажання щодо сайту</a></li>
+        <li><a href="#">Популяризувати проєкт <span class="plus">➕</span></a></li>
+      </ul>
+      <p class="copyright">© PCDAY.UA, 2024-2025</p>
+    </div>
+
+    <div class="footer-section">
+      <h3>Ми в інших країнах</h3>
+      <ul>
+        <li><a href="#">Україна</a></li>
+        <li><a href="#">Велика Британія</a></li>
+        <li><a href="#">США</a></li>
+        <li><a href="#">Польща</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Ваш регіон</h3>
+      <p>Україна, UA</p>
+      <p>Запоріжжя <span class="location-icon">📍</span></p>
+      <div class="social-icons">
+        <a href="#"><img src="images/icon/facebook.svg" alt="Facebook"></a>
+        <a href="#"><img src="images/icon/inst.svg" alt="Instagram"></a>
+        <a href="#"><img src="images/icon/telegram.svg" alt="Telegram"></a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
