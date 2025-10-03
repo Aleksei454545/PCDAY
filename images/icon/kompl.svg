@@ -1,0 +1,26 @@
+<svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.92859 27.0716V7.92871C5.92859 6.82414 6.82402 5.92871 7.92859 5.92871H27.0714C28.176 5.92871 29.0714 6.82414 29.0714 7.92871V27.0716C29.0714 28.1761 28.176 29.0716 27.0714 29.0716H7.92859C6.82402 29.0716 5.92859 28.1761 5.92859 27.0716Z" fill="url(#paint0_linear_1402_41509)"/>
+<path d="M12.6786 20.3216V14.6787C12.6786 13.5741 13.574 12.6787 14.6786 12.6787H20.3214C21.426 12.6787 22.3214 13.5741 22.3214 14.6787V20.3216C22.3214 21.4261 21.426 22.3216 20.3214 22.3216H14.6786C13.574 22.3216 12.6786 21.4261 12.6786 20.3216Z" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8.82135 4V5.92857" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M14.6071 4V5.92857" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M20.3928 4V5.92857" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M26.1785 4V5.92857" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M8.82135 29.0718V31.0003" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M14.6071 29.0718V31.0003" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M20.3928 29.0718V31.0003" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M26.1785 29.0718V31.0003" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M31 8.82178L29.0714 8.82178" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M31 14.6074L29.0714 14.6074" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M31 20.3931L29.0714 20.3931" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M31 26.1787L29.0714 26.1787" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M5.92871 8.82178L4.00014 8.82178" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M5.92871 14.6074L4.00014 14.6074" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M5.92871 20.3931L4.00014 20.3931" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M5.92871 26.1787L4.00014 26.1787" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+<defs>
+<linearGradient id="paint0_linear_1402_41509" x1="14.3287" y1="32.5933" x2="25.0857" y2="0.268135" gradientUnits="userSpaceOnUse">
+<stop stop-color="#9A9A9A" stop-opacity="0.5"/>
+<stop offset="1" stop-color="#D9D9D9" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>
